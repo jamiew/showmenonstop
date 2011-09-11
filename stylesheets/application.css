@@ -1,0 +1,85 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+*/
+
+.hidden { display: none; }
+.clear { clear: both; }
+
+@font-face {
+  font-family: "Pakt";
+  src: local("☺"), url("fonts/Pakt/Pakt.ttf") format("ttf");
+}
+
+body { color: #555; overflow: hidden; font-family: 'Pakt', sans-serif; }
+
+html, body, #container, #header, #main { margin: 0; padding: 0; }
+#container, #main { width: 100%; height: 100%; min-width: 1018px; }
+#header, #footer, #flash { display: none; }
+
+#title {}
+#results {}
+#player { height: 100%; position: absolute; z-index: 5; }
+
+
+#search_wrapper { position: absolute; z-index: 100; text-align: center; }
+#vhx_logo { display: none; }
+#showme { position: absolute; z-index: 200; cursor: pointer; width: 164px; }
+#search input#query { color: #fff; background: transparent url(images/searchbar.png) no-repeat; text-align: center; width: 1018px; height: 243px; font-size: 60pt; padding: 0; border: 0px; font-family: 'Open Sans Condensed', sans-serif; }
+#search input#submit { display: none; }
+
+input::-moz-focus-inner, button::-moz-focus-inner { border: 0; outline: none; }
+input:focus, button:focus { outline: none; }
+
+
