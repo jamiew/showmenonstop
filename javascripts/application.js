@@ -15,11 +15,17 @@
 var megaplaya = false;
 var search_visible = true;
 
+
 // parse any hashbangs and use that as search right away
 $(document).ready(function(){
   load_player();
   redraw();
-  set_query_from_hash();
+  if(window.location.hash){
+    set_query_from_hash();
+  }
+  else {
+    randomize_query();
+  }
 });
 
 $(window).bind('hashchange', function() {
@@ -27,13 +33,12 @@ $(window).bind('hashchange', function() {
   search();
 });
 
-
 $(window).resize(redraw);
 
-function redraw()
-{
-  $('#player').css('height', $(window).height() + 'px')
-  $('#player').css('width', $(window).width() + 'px')
+
+function redraw() {
+  $('#player').css('height', $(window).height() + 'px');
+  $('#player').css('width', $(window).width() + 'px');
 
   if (search_visible) {
     $('#showme').css('top', ($('#search_wrapper').position().top - $('#showme').height() + 60) + 'px');
@@ -42,31 +47,34 @@ function redraw()
     $('#showme').css('top', ($(window).height() - $('#showme').height()) + 'px');
   }
 
-  $('#showme').css('left', ($(window).width() / 2 - $('#showme').width() / 2) + 'px')
-  $('#search_wrapper').css('width', $(window).width() + 'px')
-    $('#search_wrapper').css('top', $(window).height() / 2 - 243 / 2);
+  $('#showme').css('left', ($(window).width() / 2 - $('#showme').width() / 2) + 'px');
+  $('#search_wrapper').css('width', $(window).width() + 'px');
+  $('#search_wrapper').css('top', $(window).height() / 2 - 243 / 2);
+}
+
+function get_query(){
+  return $('#query')[0].value;
+}
+
+function set_query(query){
+  $('#query')[0].value = query;
 }
 
 function set_query_from_hash(){
   if(window.location.hash) {
     var hash = window.location.hash.replace('#', '');
-    $('#query')[0].value = decodeURIComponent(hash);
+    set_query(decodeURIComponent(hash));
   }
 }
 
-function debug(string){
-  try {
-    console.log(string);
-  } catch(e) { }
+function randomize_query(){
+  var queries = ['kitties', 'kid cudi', 'tree frogs', 'kids jumping off sheds', 'ytmnds'];
+  query = shuffle(queries)[0];
+  set_query(query);
 }
 
-function shuffle(v){
-  for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
-  return v;
-};
-
 function search(){
-  var query = $('#query')[0].value;
+  var query = get_query();
   debug(">> search() query="+query);
 
   var encoded = '#'+encodeURIComponent(query);
@@ -180,15 +188,26 @@ function search_youtube(query){
 function search_youtube_callback(resp){
   debug(">> search_youtube_callback()");
   if(resp.feed.entry == undefined) {
-    $('#query')[0].value = "No results, sorry dawg";
+    set_query("No results, sorry dawg");
     show_search();
     return false;
   }
 
-  var urls = $.map(resp.feed.entry, function(entry,i){ return {url: entry.link[0].href}; })
+  var urls = $.map(resp.feed.entry, function(entry,i){ return {url: entry.link[0].href}; });
   debug(urls);
 
   urls = shuffle(urls); // randomize
   debug(urls);
-  megaplaya.api_playQueue(urls);
+  return megaplaya.api_playQueue(urls);
+}
+
+function debug(string){
+  try {
+    console.log(string);
+  } catch(e) { }
+}
+
+function shuffle(v){
+  for(var j, x, i = v.length; i; j = parseInt(Math.random() * i, 0), x = v[--i], v[i] = v[j], v[j] = x);
+  return v;
 }
