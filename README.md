@@ -1,14 +1,13 @@
-== SHOW ME _x_ NON STOP
+## SHOW ME _x_ NON STOP
 
-CAN'T STOP
-WON'T STOP
+Endlessly plays videos based on your search term
 
-Demo: <http://oneglove.org>
+View it online: <http://jamiedubs.com/nonstop>
 
 Built with <http://vhx.tv> and <http://youtube.com> for NYC's inaugural [Video Hackday](http://nyc.hackday.tv)
 
 
-== Authors
+## Authors
 
 * [Jamie Dubs](http://jamiedubs.com)
 * [Chad Pugh](http://thebigpugh.com)
