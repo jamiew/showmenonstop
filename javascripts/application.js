@@ -46,10 +46,11 @@ function redraw() {
   else {
     $('#showme').css('top', ($(window).height() - $('#showme').height()) + 'px');
   }
-
   $('#showme').css('left', ($(window).width() / 2 - $('#showme').width() / 2) + 'px');
+
   $('#search_wrapper').css('width', $(window).width() + 'px');
   $('#search_wrapper').css('top', $(window).height() / 2 - 243 / 2);
+  // TODO if doc-width < #search_wrapper width, offset it so things remain centered
 }
 
 function get_query(){
@@ -78,11 +79,8 @@ function search(){
   debug(">> search() query="+query);
 
   var encoded = '#'+encodeURIComponent(query);
-  if(window.location.hash != encoded) {
-    window.location.hash = encoded;
-  }
+  window.location.hash = encoded;
 
-  // $('#title').html("Searching for " + query + " ...").show();
   $('#title').hide();
   $('#player').show();
   hide_search();
@@ -156,6 +154,8 @@ function megaplaya_loaded(){
 }
 
 function search_vimeo(query){
+  // TODO; Vimeo API requires authentication for search :-(
+  /*
   $.ajax({
     type: "GET",
     url: "http://vimeo.com/api/v2/jamiew/videos.json",
@@ -170,6 +170,7 @@ function search_vimeo(query){
       }
     }
   });
+  */
 }
 
 function search_youtube(query){
