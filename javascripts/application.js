@@ -78,7 +78,7 @@ function search(){
   debug(">> search() query="+query);
 
   var encoded = '#'+encodeURIComponent(query);
-  if(window.location.hash != 'encoded') {
+  if(window.location.hash != encoded) {
     window.location.hash = encoded;
   }
 
