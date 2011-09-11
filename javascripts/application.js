@@ -126,6 +126,7 @@ function show_search(){
 }
 
 function hide_search(){
+  $('#background').hide();
   if(!search_visible){
     return;
   }
