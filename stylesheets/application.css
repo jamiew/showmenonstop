@@ -76,7 +76,7 @@ html, body, #container, #header, #main { margin: 0; padding: 0; }
 #search_wrapper { position: absolute; z-index: 100; text-align: center; }
 #vhx_logo { display: none; }
 #showme { position: absolute; z-index: 200; cursor: pointer; width: 164px; }
-#search input#query { color: #fff; background: transparent url(images/searchbar.png) no-repeat; text-align: center; width: 1018px; height: 243px; font-size: 60pt; padding: 0; border: 0px; font-family: 'Open Sans Condensed', sans-serif; }
+#search input#query { color: #fff; background: transparent url(../images/searchbar.png) no-repeat; text-align: center; width: 1018px; height: 243px; font-size: 60pt; padding: 0; border: 0px; font-family: 'Open Sans Condensed', sans-serif; }
 #search input#submit { display: none; }
 
 input::-moz-focus-inner, button::-moz-focus-inner { border: 0; outline: none; }
