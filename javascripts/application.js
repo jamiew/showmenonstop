@@ -87,7 +87,7 @@ function set_query_from_hash(){
 }
 
 function randomize_query(){
-  var queries = ['kitties', 'kid cudi', 'tree frogs', 'kids jumping off sheds', 'ytmnds'];
+  var queries = ['kitties', 'kid cudi', 'tree frogs', 'kids jumping off sheds'];
   query = shuffle(queries)[0];
   set_query(query);
 }
