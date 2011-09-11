@@ -3,7 +3,7 @@
 <head>
   <title>SHOW ME x NON-STOP</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
 
   <link href="stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
 
@@ -16,19 +16,19 @@
 </head>
 <body>
 
-  <div id='player'></div>
+  <div id="player"></div>
 
-  <div id='search_wrapper'>
+  <div id="search_wrapper">
 
-    <form action='/search.json' id='search' method='POST' onsubmit='search(); return false;' style='display:none'>
-      <input id='query' name='query' onclick='$(this).select()' type='text' value='cats'>
-      <input id='submit' type='submit' value='Search'>
+    <form action="/search.json" id="search" method="POST" onsubmit="search(); return false;" style="display:none">
+      <input id="query" name="query" onclick="$(this).select()" type="text" value="cats">
+      <input id="submit" type="submit" value="Search">
     </form>
 
-    <div class='clear'></div>
+    <div class="clear"></div>
   </div>
 
-  <div id='showme' onclick='toggle_search(); return false;'><img alt="Showme" src="images/showme.png" /></div>
+  <div id="showme" onclick="toggle_search(); return false;"><img alt="Showme" src="images/showme.png" /></div>
 
 </body>
 </html>
