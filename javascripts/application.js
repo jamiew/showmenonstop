@@ -55,7 +55,9 @@ function set_query_from_hash(){
 }
 
 function debug(string){
-  console.log(string);
+  try {
+    console.log(string);
+  } catch(e) { }
 }
 
 function shuffle(v){
@@ -177,7 +179,15 @@ function search_youtube(query){
 
 function search_youtube_callback(resp){
   debug(">> search_youtube_callback()");
+  if(resp.feed.entry == undefined) {
+    $('#query')[0].value = "No results, sorry dawg";
+    show_search();
+    return false;
+  }
+
   var urls = $.map(resp.feed.entry, function(entry,i){ return {url: entry.link[0].href}; })
+  debug(urls);
+
   urls = shuffle(urls); // randomize
   debug(urls);
   megaplaya.api_playQueue(urls);
