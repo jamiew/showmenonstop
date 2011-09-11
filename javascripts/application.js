@@ -18,14 +18,19 @@ var search_visible = true;
 
 // parse any hashbangs and use that as search right away
 $(document).ready(function(){
+
   load_player();
   redraw();
+
+  $('#background').click(skip_video);
+
   if(window.location.hash){
     set_query_from_hash();
   }
   else {
     randomize_query();
   }
+
 });
 
 $(window).bind('hashchange', function() {
@@ -40,6 +45,9 @@ function redraw() {
   $('#player').css('height', $(window).height() + 'px');
   $('#player').css('width', $(window).width() + 'px');
 
+  $('#background').css('height', $(window).height() + 'px');
+  $('#background').css('width', $(window).width() + 'px');
+
   if (search_visible) {
     $('#showme').css('top', ($('#search_wrapper').position().top - $('#showme').height() + 60) + 'px');
   }
@@ -51,6 +59,16 @@ function redraw() {
   $('#search_wrapper').css('width', $(window).width() + 'px');
   $('#search_wrapper').css('top', $(window).height() / 2 - 243 / 2);
   // TODO if doc-width < #search_wrapper width, offset it so things remain centered
+}
+
+function skip_video(){
+  if(!megaplaya){
+    debug("Megaplaya not loaded, can't skip yet");
+    return false;
+  }
+
+  debug("Skipping video...");
+  megaplaya.api_nextVideo();
 }
 
 function get_query(){
@@ -126,7 +144,7 @@ function show_search(){
 }
 
 function hide_search(){
-  $('#background').hide();
+  $('#background').css('background', 'transparent');
   if(!search_visible){
     return;
   }
@@ -198,8 +216,7 @@ function search_youtube_callback(resp){
   var urls = $.map(resp.feed.entry, function(entry,i){ return {url: entry.link[0].href}; });
   debug(urls);
 
-  urls = shuffle(urls); // randomize
-  debug(urls);
+  urls = shuffle(urls);
   return megaplaya.api_playQueue(urls);
 }
 
