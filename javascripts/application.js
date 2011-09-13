@@ -1,20 +1,6 @@
-// This is a manifest file that'll be compiled into including all the files listed below.
-// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
-// be included in the compiled file accessible from http://example.com/assets/application.js
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-//= require jquery
-//= require swfobject
-//= require jquery.easing.1.3
-//= require jquery_ujs
-//= require_tree .
-
-
 // globals
 var megaplaya = false;
 var search_visible = true;
-
 
 // parse any hashbangs and use that as search right away
 $(document).ready(function(){
@@ -87,7 +73,12 @@ function set_query_from_hash(){
 }
 
 function randomize_query(){
-  var queries = ['kitties', 'kid cudi', 'tree frogs', 'kids jumping off sheds'];
+  var queries = [
+    'kittens', 'kid cudi', 'tree frogs', 'kids jumping off sheds',
+    'burning man', 'super soaker flame throwers',
+    // 'dogs welcoming soldiers home from iraq' // TODO resize font down so long strings fit
+    'spaceship launch', 'motion graphics'
+    ];
   query = shuffle(queries)[0];
   set_query(query);
 }
