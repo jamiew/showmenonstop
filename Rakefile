@@ -5,5 +5,5 @@
 
 desc 'Deploy'
 task :deploy do
-  sh 'rsync -rtzh --progress --delete ./ jamiew@txd:~/web/public/nonstop/'
+  sh 'rsync -rtzh --progress --delete ./ dubslice:/var/www/showmenonstop.com/'
 end
