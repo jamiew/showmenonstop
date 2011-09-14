@@ -77,7 +77,7 @@ function randomize_query(){
     'kittens', 'kid cudi', 'tree frogs', 'kids jumping off sheds',
     'burning man', 'super soaker flame throwers',
     // 'dogs welcoming soldiers home from iraq' // TODO resize font down so long strings fit
-    'spaceship launch', 'motion graphics'
+    'spaceship launches', 'motion graphics', 'stop-motion animation'
     ];
   query = shuffle(queries)[0];
   set_query(query);
