@@ -68,7 +68,7 @@ function set_query(query){
 function set_query_from_hash(){
   if(window.location.hash) {
     var hash = window.location.hash.replace('#', '');
-    set_query(decodeURIComponent(hash));
+    set_query(decodeURIComponent(hash.gsub('_', ' ')));
   }
 }
 
@@ -87,7 +87,7 @@ function search(){
   var query = get_query();
   debug(">> search() query="+query);
 
-  var encoded = '#'+encodeURIComponent(query);
+  var encoded = '#'+encodeURIComponent(query.gsub(' ', '_'));
   window.location.hash = encoded;
 
   $('#title').hide();
