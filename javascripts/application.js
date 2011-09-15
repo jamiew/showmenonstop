@@ -68,7 +68,7 @@ function set_query(query){
 function set_query_from_hash(){
   if(window.location.hash) {
     var hash = window.location.hash.replace('#', '');
-    set_query(decodeURIComponent(hash.gsub('_', ' ')));
+    set_query(decodeURIComponent(hash.replace(/_/g, ' ')));
   }
 }
 
@@ -77,7 +77,7 @@ function randomize_query(){
     'kittens', 'kid cudi', 'tree frogs', 'kids jumping off sheds',
     'burning man', 'super soaker flame throwers',
     // 'dogs welcoming soldiers home from iraq' // TODO resize font down so long strings fit
-    'spaceship launches', 'motion graphics', 'stop-motion animation'
+    'spaceship launches', 'motion graphics'
     ];
   query = shuffle(queries)[0];
   set_query(query);
@@ -87,7 +87,7 @@ function search(){
   var query = get_query();
   debug(">> search() query="+query);
 
-  var encoded = '#'+encodeURIComponent(query.gsub(' ', '_'));
+  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
   window.location.hash = encoded;
 
   $('#title').hide();
