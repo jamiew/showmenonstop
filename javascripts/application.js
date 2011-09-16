@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 $(window).bind('hashchange', function() {
   set_query_from_hash();
-  execute_search();
+  execute_search(get_query_from_hash());
 });
 
 $(window).resize(redraw);
@@ -72,9 +72,13 @@ function set_query(query){
   $('#query')[0].value = query;
 }
 
+function get_query_from_hash(){
+  return window.location.hash.replace('#', '');
+}
+
 function set_query_from_hash(){
   if(window.location.hash) {
-    var hash = window.location.hash.replace('#', '');
+    var hash = get_query_from_hash();
     set_query(decodeURIComponent(hash.replace(/_/g, ' ')));
   }
 }
@@ -157,7 +161,7 @@ function megaplaya_loaded(){
   if(window.location.hash){
     debug("hash is present, executing searching!");
     $('#search').hide();
-    execute_search();
+    execute_search(get_query_from_hash());
   }
   else {
     show_search();
@@ -198,12 +202,6 @@ function handle_keydown(e){
 }
 
 function submit_search(){
-  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
-  window.location.hash = encoded;
-  // hashchange then executes search()
-}
-
-function execute_search(query){
   var query = get_query();
   if(query == undefined || query == ''){
     debug(">> no query specified, doing something at random");
@@ -212,7 +210,12 @@ function execute_search(query){
   else {
     debug(">> search() query="+query);
   }
+  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
+  window.location.hash = encoded;
+  // hashchange then executes search()
+}
 
+function execute_search(query){
   $('#title').hide();
   $('#player').show();
   hide_search();
@@ -223,23 +226,7 @@ function execute_search(query){
 }
 
 function search_vimeo(query){
-  // TODO; Vimeo API requires authentication for search :-(
-  /*
-  $.ajax({
-    type: "GET",
-    url: "http://vimeo.com/api/v2/jamiew/videos.json",
-    dataType: "jsonp",
-    success: function(videos, status, ajax) {
-      debug(">> load_videos().success");
-      if(videos) {
-        megaplaya.api_playQueue(videos);
-      }
-      else {
-        $('#title').html("No videos found :(").fadeIn();
-      }
-    }
-  });
-  */
+  // TODO: Vimeo API requires authentication for search :-(
 }
 
 function search_youtube(query){
