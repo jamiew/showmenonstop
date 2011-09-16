@@ -44,7 +44,11 @@ function redraw() {
 
   $('#search_wrapper').css('width', $(window).width() + 'px');
   $('#search_wrapper').css('top', $(window).height() / 2 - 243 / 2);
-  // TODO if doc-width < #search_wrapper width, offset it so things remain centered
+
+  // if doc-width < #search_wrapper width, offset it so things remain centered
+  if($(window).width() < $('#query').width()) {
+    $('#search_wrapper').css('left', (($(window).width() - $('#query').width())/2) + 'px');
+  }
 }
 
 function skip_video(){
@@ -121,16 +125,16 @@ function toggle_search(){
 }
 
 function show_search(){
-  debug("show_search()");
 
   if (search_visible){
-    debug("show_search(): already visible, skipping");
-    //return;
+    debug("show_search(): already visible but showing anyway");
+    // return;
   }
 
-  // $('#showme').css('position', 'static');
   $('#showme').animate({ top: ($('#search_wrapper').position().top - $('#showme').height() + 60) + 'px' }, 1500, 'easeOutElastic');
   $('#search').fadeIn('fast', function(){ $('#query').select(); });
+  $('#socialmedia').fadeIn('fast');
+  $('#vhx_logo').fadeIn('fast');
   search_visible = true;
 }
 
@@ -139,8 +143,11 @@ function hide_search(){
   if(!search_visible){
     return;
   }
-  $('#showme').animate({ top: ($(window).height() - $('#showme').height()) + 'px'}, 1500, 'easeOutElastic');
-  $('#search').fadeOut('slow'); // immediately
+  $('#showme').animate({ top: ($(window).height() - $('#showme').height() + 10) + 'px'}, 1500, 'easeOutElastic');
+  $('#search').fadeOut('slow');
+  $('#socialmedia').hide();
+  $('#vhx_logo').hide();
+
   search_visible = false;
 }
 

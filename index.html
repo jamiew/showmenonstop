@@ -14,6 +14,24 @@
 </head>
 <body>
 
+  <div id="socialmedia">
+    <div class="twitter">
+      <a href="https://twitter.com/share" data-url="http://showmenonstop.com" class="twitter-share-button" data-text="Watch videos, nonstop" data-count="vertical">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    </div>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#appId=288165254531779&xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-like" data-href="http://showmenonstop.com" data-send="false" data-width="200" data-show-faces="true" data-colorscheme="light" data-font="verdana"></div>
+
+  </div>
+
+
   <div id="background"></div>
 
   <div id="player"></div>
@@ -28,7 +46,14 @@
     <div class="clear"></div>
   </div>
 
-  <div id="showme" onclick="toggle_search(); return false;"><img alt="Showme" src="images/showme.png" /></div>
+  <div id="showme" onclick="toggle_search(); return false;">
+    <img alt="Showme" src="images/showme.png" />
+  </div>
+
+  <div id="vhx_logo">
+    <a href="http://vhx.tv" target="_blank"><img src="images/vhx_logo.png" alt="VHX.TV" title="VHX.TV" /></a>
+  </div>
+
 
 
 <!-- stats -->
