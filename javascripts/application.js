@@ -197,7 +197,7 @@ function handle_keydown(e){
   return true;
 }
 
-function submit_query(){
+function submit_search(){
   var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
   window.location.hash = encoded;
   // hashchange then executes search()
