@@ -15,6 +15,7 @@ $(document).ready(function(){
   }
   else {
     randomize_query();
+    inject_twitter_button();
     setTimeout(function(){ $('#vhx_logo').fadeIn('slow') }, 600);
   }
 
@@ -77,15 +78,18 @@ function set_query_from_hash(){
   }
 }
 
-function randomize_query(){
+function random_query(){
   var queries = [
     'kittens', 'puppies playing', 'kid cudi', 'kids jumping off sheds',
     'burning man', 'super soaker flame throwers', 'movie trailers',
     'spaceship launches', 'motion graphics', 'elephants painting',
     'slow motion', 'huge explosions'
     ];
-  query = shuffle(queries)[0];
-  set_query(query);
+  return shuffle(queries)[0];
+}
+
+function randomize_query(){
+  set_query(random_query());
 }
 
 function search(){
@@ -195,7 +199,6 @@ function search_youtube(query){
   debug(">> search_youtube() query="+query);
   var results = 50;
   var script = document.createElement('script');
-  script.setAttribute('id', 'jsonScript');
   script.setAttribute('type', 'text/javascript');
   script.setAttribute('src', 'http://gdata.youtube.com/feeds/videos?vq=' + query +
          '&max-results=' + results + '&alt=json-in-script&' +
@@ -218,6 +221,21 @@ function search_youtube_callback(resp){
   urls = shuffle(urls);
   return megaplaya.api_playQueue(urls);
 }
+
+// Fanciness so I can randomize the message in the tweet
+function inject_twitter_button(){
+  debug($('.twitter a').attr('data-text'));
+  var new_text = $('.twitter a').attr('data-text').replace("baby pandas", random_query());
+  $('.twitter a').attr('data-text', new_text);
+  debug($('.twitter a').attr('data-text'));
+
+  // <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+  var script = document.createElement('script');
+  script.setAttribute('type', 'text/javascript');
+  script.setAttribute('src', '//platform.twitter.com/widgets.js');
+  document.documentElement.firstChild.appendChild(script);
+}
+
 
 function debug(string){
   try {
