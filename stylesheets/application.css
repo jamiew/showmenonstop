@@ -83,8 +83,8 @@ input::-moz-focus-inner, button::-moz-focus-inner { border: 0; outline: none; }
 input:focus, button:focus { outline: none; }
 
 /* Social Media Experts */
-#socialmedia { position: absolute; z-index: 100; top: 20px; right: 20px;}
-#socialmedia div { float: left; margin-right: 10px; }
+#socialmedia { position: absolute; z-index: 100; top: 10px; right: 0px;}
+#socialmedia div { float: left; margin-left: 10px; }
 
 #vhx_logo { position: absolute; z-index: 100; bottom: 5px; right: 5px; display: none; }
 
