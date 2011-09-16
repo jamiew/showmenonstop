@@ -79,10 +79,10 @@ function set_query_from_hash(){
 
 function randomize_query(){
   var queries = [
-    'kittens', 'kid cudi', 'tree frogs', 'kids jumping off sheds',
-    'burning man', 'super soaker flame throwers',
-    // 'dogs welcoming soldiers home from iraq' // TODO resize font down so long strings fit
-    'spaceship launches', 'motion graphics'
+    'kittens', 'puppies playing', 'kid cudi', 'kids jumping off sheds',
+    'burning man', 'super soaker flame throwers', 'movie trailers',
+    'spaceship launches', 'motion graphics', 'elephants painting',
+    'slow motion', 'huge explosions'
     ];
   query = shuffle(queries)[0];
   set_query(query);
