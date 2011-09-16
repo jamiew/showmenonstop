@@ -73,13 +73,13 @@ function set_query(query){
 }
 
 function get_query_from_hash(){
-  return window.location.hash.replace('#', '');
+  return window.location.hash.replace('#', '').replace(/_/g, ' ');
 }
 
 function set_query_from_hash(){
   if(window.location.hash) {
     var hash = get_query_from_hash();
-    set_query(decodeURIComponent(hash.replace(/_/g, ' ')));
+    set_query(decodeURIComponent(hash));
   }
 }
 
