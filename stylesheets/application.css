@@ -86,5 +86,5 @@ input:focus, button:focus { outline: none; }
 #socialmedia { position: absolute; z-index: 100; top: 20px; right: 20px;}
 #socialmedia div { float: left; margin-right: 10px; }
 
-#vhx_logo { position: absolute; z-index: 100; bottom: 5px; right: 5px; }
+#vhx_logo { position: absolute; z-index: 100; bottom: 5px; right: 5px; display: none; }
 

@@ -15,6 +15,7 @@ $(document).ready(function(){
   }
   else {
     randomize_query();
+    setTimeout(function(){ $('#vhx_logo').fadeIn('slow') }, 600);
   }
 
 });
