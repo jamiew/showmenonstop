@@ -134,7 +134,7 @@ function show_search(){
   $('#showme').animate({ top: ($('#search_wrapper').position().top - $('#showme').height() + 60) + 'px' }, 1500, 'easeOutElastic');
   $('#search').fadeIn('fast', function(){ $('#query').select(); });
   $('#socialmedia').fadeIn('fast');
-  $('#vhx_logo').fadeIn('fast');
+  // $('#vhx_logo').fadeIn('fast');
   search_visible = true;
 }
 
