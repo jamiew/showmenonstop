@@ -198,8 +198,13 @@ function handle_keydown(e){
 }
 
 function submit_query(){
-  var query = get_query();
+  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
+  window.location.hash = encoded;
+  // hashchange then executes search()
+}
 
+function execute_search(query){
+  var query = get_query();
   if(query == undefined || query == ''){
     debug(">> no query specified, doing something at random");
     query = random_query();
@@ -208,12 +213,6 @@ function submit_query(){
     debug(">> search() query="+query);
   }
 
-  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
-  window.location.hash = encoded;
-  // hashchange then executes search()
-}
-
-function execute_search(){
   $('#title').hide();
   $('#player').show();
   hide_search();
