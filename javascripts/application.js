@@ -1,6 +1,7 @@
 // globals
 var megaplaya = false;
 var search_visible = true;
+var keyboard_disabled = false;
 
 // parse any hashbangs and use that as search right away
 $(document).ready(function(){
@@ -23,7 +24,7 @@ $(document).ready(function(){
 
 $(window).bind('hashchange', function() {
   set_query_from_hash();
-  search();
+  execute_search();
 });
 
 $(window).resize(redraw);
@@ -92,22 +93,6 @@ function randomize_query(){
   set_query(random_query());
 }
 
-function search(){
-  var query = get_query();
-  debug(">> search() query="+query);
-
-  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
-  window.location.hash = encoded;
-
-  $('#title').hide();
-  $('#player').show();
-  hide_search();
-  search_youtube(query);
-  // search_vimeo(query);
-
-  return false;
-}
-
 function load_player(){
   debug(">> load_player()");
 
@@ -145,10 +130,15 @@ function show_search(){
 
 function hide_search(){
   $('#background').css('background', 'transparent');
+  $('#background').css('height', '70%'); // Don't go all the way to the bottom -- allow YouTube ad to be closed
+  // $('#background').hide();
+
   if(!search_visible){
     return;
   }
+
   $('#showme').animate({ top: ($(window).height() - $('#showme').height() + 10) + 'px'}, 1500, 'easeOutElastic');
+  $('#query').blur();
   $('#search').fadeOut('slow');
   $('#socialmedia').hide();
   $('#vhx_logo').hide();
@@ -161,18 +151,76 @@ function megaplaya_loaded(){
   megaplaya = $('#player').children()[0];
   megaplaya.api_disable();
 
-  $('#player').click(function(){
-    alert('test');
-  });
+  $(window).keydown(handle_keydown);
+  // megaplaya.api_addListener('onKeyboardDown', handle_megaplaya_keydown);
 
   if(window.location.hash){
     debug("hash is present, executing searching!");
     $('#search').hide();
-    search();
+    execute_search();
   }
   else {
     show_search();
   }
+}
+
+function disable_keyboard(){
+  debug("disable_keyboard()");
+  keyboard_disabled = true;
+}
+
+function enable_keyboard(){
+  debug("enable_keyboard()");
+  keyboard_disabled = false;
+}
+
+function handle_keydown(e){
+  if(keyboard_disabled || !megaplaya || e.shiftKey || e.ctrlKey || e.metaKey){
+    return true;
+  };
+
+  var code = e.keyCode;
+  switch(code){
+  case 32: // Spacebar
+    debug("SPACEBAR");
+    megaplaya.api_toggle();
+    break;
+  case 37: // Left arrow
+    debug("<--");
+    megaplaya.api_prevVideo();
+    break;
+  case 39: // Right arrow
+    debug("-->");
+    megaplaya.api_nextVideo();
+    break;
+  }
+  return true;
+}
+
+function submit_query(){
+  var query = get_query();
+
+  if(query == undefined || query == ''){
+    debug(">> no query specified, doing something at random");
+    query = random_query();
+  }
+  else {
+    debug(">> search() query="+query);
+  }
+
+  var encoded = '#'+encodeURIComponent(query.replace(/\s/g, '_'));
+  window.location.hash = encoded;
+  // hashchange then executes search()
+}
+
+function execute_search(){
+  $('#title').hide();
+  $('#player').show();
+  hide_search();
+  search_youtube(query);
+  // search_vimeo(query);
+
+  return false;
 }
 
 function search_vimeo(query){
@@ -208,7 +256,6 @@ function search_youtube(query){
 }
 
 function search_youtube_callback(resp){
-  debug(">> search_youtube_callback()");
   if(resp.feed.entry == undefined) {
     set_query("No results, sorry dawg");
     show_search();
@@ -216,7 +263,7 @@ function search_youtube_callback(resp){
   }
 
   var urls = $.map(resp.feed.entry, function(entry,i){ return {url: entry.link[0].href}; });
-  debug(urls);
+  debug(">> search_youtube_callback(): loading "+urls.length+" videos...");
 
   urls = shuffle(urls);
   return megaplaya.api_playQueue(urls);
@@ -224,10 +271,8 @@ function search_youtube_callback(resp){
 
 // Fanciness so I can randomize the message in the tweet
 function inject_twitter_button(){
-  debug($('.twitter a').attr('data-text'));
   var new_text = $('.twitter a').attr('data-text').replace("baby pandas", random_query());
   $('.twitter a').attr('data-text', new_text);
-  debug($('.twitter a').attr('data-text'));
 
   // <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
   var script = document.createElement('script');
