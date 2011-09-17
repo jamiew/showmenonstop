@@ -87,4 +87,11 @@ input:focus, button:focus { outline: none; }
 #socialmedia div { float: left; margin-left: 10px; }
 
 #vhx_logo { position: absolute; z-index: 100; bottom: 0px; right: 5px; display: none; }
+#vhx_logo div { float: left; }
+#vhx_logo #logo { opacity: 0.7; }
+#vhx_logo #logo:hover { opacity: 1; }
+#vhx_logo #contact { opacity: 0.4; margin-top: 36px; margin-right: 2px; }
+#vhx_logo #contact:hover { opacity: 1; }
 
+a { color: #fff; }
+#connect_widget_interactive_area a { color: #fff; }
